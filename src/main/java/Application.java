@@ -6,8 +6,11 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
+//import static jdk.internal.vm.PostVMInitHook.run;
+
 public class Application {
     public static void main(String[] args) throws IOException {
+        /*
         Screen screen = null;
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
@@ -24,6 +27,9 @@ public class Application {
         screen.clear();
         screen.setCharacter(10, 10, TextCharacter.fromCharacter('X')[0]);
         screen.refresh();
+         */
+        Game game = new Game();
+        game.run();
     }
 
 }

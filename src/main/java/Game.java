@@ -31,4 +31,7 @@ public class Game {
     };
     private Terminal terminal;
     private Screen screen;
+
+    private int x = 10;
+    private int y = 10;
 }
