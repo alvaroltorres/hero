@@ -29,9 +29,13 @@ public class Game {
     };
 
     public void run() throws IOException {
-        draw();
-        KeyStroke key = screen.readInput();
-        processKey(key);
+        while (true) {
+            draw();
+            KeyStroke key = screen.readInput();
+            if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') screen.close();
+            if (key.getKeyType() == KeyType.EOF) break;
+            processKey(key);
+        }
     };
     private Terminal terminal;
     private Screen screen;
@@ -40,10 +44,29 @@ public class Game {
     private int y = 10;
 
     private void processKey(KeyStroke key) {
+        /*
         if (key.getKeyType() == KeyType.ArrowUp)
             System.out.println(key);
+
         if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q')
             System.out.println(key);
+        */
+        switch (key.getKeyType()) {
+            case ArrowUp:
+                y--;
+                break;
+            case ArrowDown:
+                y++;
+                break;
+            case ArrowLeft:
+                x--;
+                break;
+            case ArrowRight:
+                x++;
+                break;
+            default:
+                break;
+        }
 
 
     };
