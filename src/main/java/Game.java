@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Game {
     public Game() throws IOException {
-        Screen screen = null;
+        //Screen screen = null;
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             this.screen = new TerminalScreen(terminal); //screen = new TerminalScreen(terminal);
@@ -20,9 +20,9 @@ public class Game {
         //this.screen = new TerminalScreen(terminal);
     };
 
-    private void draw() throws IOException { // doesn´t catch and handle any ioexception
+    private void draw() throws IOException { // doesn´t catch and handle any ioexception ( pass it to the calling method by declaring that it throws that kind of exception)
         screen.clear();
-        screen.setCharacter(10, 10, TextCharacter.fromCharacter('X')[0]);
+        screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
         screen.refresh();
     };
 
