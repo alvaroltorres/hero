@@ -15,8 +15,10 @@ public class Game {
     //private int x = 10;
     //private int y = 10;
     private final Hero hero;
+    private Arena arena;
     public Game() throws IOException {
         hero = new Hero(10, 10);
+        arena = new Arena(22, 22, hero);
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             this.screen = new TerminalScreen(terminal); //screen = new TerminalScreen(terminal);
@@ -31,7 +33,7 @@ public class Game {
 
     private void draw() throws IOException { // doesn´t catch and handle any ioexception ( pass it to the calling method by declaring that it throws that kind of exception)
         screen.clear();
-        hero.draw(screen);//screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
+        arena.draw(screen);//screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
         screen.refresh();
     };
 
@@ -46,32 +48,6 @@ public class Game {
     };
 
     private void processKey(KeyStroke key) {
-        /*
-        if (key.getKeyType() == KeyType.ArrowUp)
-            System.out.println(key);
-
-        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q')
-            System.out.println(key);
-        */
-        switch (key.getKeyType()) {
-            case ArrowUp:
-                moveHero(hero.moveUp());
-                break;
-            case ArrowDown:
-                moveHero(hero.moveDown());
-                break;
-            case ArrowLeft:
-                moveHero(hero.moveLeft());
-                break;
-            case ArrowRight:
-                moveHero(hero.moveRight());
-                break;
-            default:
-                break;
-        }
-
-    };
-    private void moveHero(Position position) {
-        hero.setPosition(position);
+        arena.processKey(key);
     }
 }
