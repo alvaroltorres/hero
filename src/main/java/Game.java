@@ -16,7 +16,6 @@ public class Game {
     //private int y = 10;
     private final Hero hero;
     public Game() throws IOException {
-        //Screen screen = null;
         hero = new Hero(10, 10);
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
@@ -56,22 +55,23 @@ public class Game {
         */
         switch (key.getKeyType()) {
             case ArrowUp:
-                hero.moveUp();
+                moveHero(hero.moveUp());
                 break;
             case ArrowDown:
-                hero.moveDown();
+                moveHero(hero.moveDown());
                 break;
             case ArrowLeft:
-                hero.moveLeft();
+                moveHero(hero.moveLeft());
                 break;
             case ArrowRight:
-                hero.moveRight();
+                moveHero(hero.moveRight());
                 break;
             default:
                 break;
         }
 
     };
-
-
+    private void moveHero(Position position) {
+        hero.setPosition(position);
+    }
 }

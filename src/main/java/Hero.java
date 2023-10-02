@@ -5,44 +5,33 @@ import java.io.IOException;
 
 public class Hero {
 
-    private int x;
-    private int y;
+    private Position position;
 
-    public void setX(int x){
-        this.x = x;
-    }
-    public void setY(int y){
-        this.y = y;
-    }
-
-    public int getX(int x){
-        return x;
-    }
-    public int getY(int y){
-        return y;
-    }
 
     public Hero(int x, int y) {
-        this.x = x;
-        this.y = y;
-    } //Hero hero = new Hero(10, 10);
+        this.position = new Position(x, y);
 
-    public void moveUp(){
-        y--;
+    }; //Hero hero = new Hero(10, 10);
+
+    public Position moveUp() {
+        return new Position(position.GetX(), position.GetY() - 1);
     }
-    public void moveRight(){
-        x++;
+    public Position moveRight(){
+        return new Position(position.GetX() + 1, position.GetY());
     }
-    public void moveDown(){
-        y++;
+    public Position moveDown(){
+        return new Position(position.GetX(), position.GetY() + 1);
     }
-    public void moveLeft(){
-        x--;
+    public Position moveLeft(){
+        return new Position(position.GetX() - 1, position.GetY());
     }
     public void draw(Screen screen) throws IOException {
         screen.clear();
-        screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
+        screen.setCharacter(position.GetX(), position.GetY(), TextCharacter.fromCharacter('X')[0]);
         screen.refresh();
     }
 
-};
+    public void setPosition(Position position) {
+       this.position  = position;
+    }
+}
