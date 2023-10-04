@@ -28,8 +28,15 @@ public class Application {
             e.printStackTrace();
         }
         */
-        Game game = new Game();
+        /*
+        Game game = new Game(60, 30);
         game.run();
+         */
+        try {
+            new Game(60, 30).run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,4 +1,3 @@
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -17,25 +16,22 @@ public class Game {
     private final Hero hero;
     private Arena arena;
     private Position position;
-    public Game() throws IOException {
+
+    public Game(int width, int height) throws IOException {
         hero = new Hero(1, 1);
         position = new Position(0, 0);
-        arena = new Arena(position, 22, 22, hero);
-        try {
-            Terminal terminal = new DefaultTerminalFactory().createTerminal();
-            this.screen = new TerminalScreen(terminal); //screen = new TerminalScreen(terminal);
-            screen.setCursorPosition(null); // we don't need a cursor
-            screen.startScreen(); // screens must be started
-            screen.doResizeIfNecessary();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        arena = new Arena(width, height);
+        Terminal terminal = new DefaultTerminalFactory().createTerminal();
+        this.screen = new TerminalScreen(terminal); //screen = new TerminalScreen(terminal);
+        screen.setCursorPosition(null); // we don't need a cursor
+        screen.startScreen(); // screens must be started
+        screen.doResizeIfNecessary();
         //this.screen = new TerminalScreen(terminal);
     };
 
     private void draw() throws IOException { // doesn´t catch and handle any ioexception ( pass it to the calling method by declaring that it throws that kind of exception)
         screen.clear();
-        arena.draw(screen);//screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
+        arena.draw(screen.newTextGraphics());
         screen.refresh();
     };
 
@@ -52,4 +48,5 @@ public class Game {
     private void processKey(KeyStroke key) {
         arena.processKey(key);
     }
+
 }

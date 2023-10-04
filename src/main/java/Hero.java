@@ -1,4 +1,8 @@
+import com.googlecode.lanterna.SGR;
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
@@ -24,13 +28,13 @@ public class Hero {
     public Position moveLeft(){
         return new Position(position.GetX() - 1, position.GetY());
     }
-    /*
-    public void draw(Screen screen) throws IOException {
-        screen.clear();
-        screen.setCharacter(position.GetX(), position.GetY(), TextCharacter.fromCharacter('X')[0]);
-        screen.refresh();
+
+    public void draw(TextGraphics graphics) {
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
+        graphics.enableModifiers(SGR.BOLD);
+        graphics.putString(new TerminalPosition(position.GetX(), position.GetY()), "X");
     }
-    */
+
     public void setPosition(Position position) {
        this.position  = position;
     }
