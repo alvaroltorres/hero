@@ -5,16 +5,17 @@ import com.googlecode.lanterna.screen.Screen;
 import java.io.IOException;
 
 public class Arena {
+    private Position position;
     private int height;
     private int width;
+    private Hero hero;
 
-    public Arena(int height, int width, Hero hero){
+    public Arena(Position position, int height, int width, Hero hero){
+        this.position = position;
         this.height = height;
         this.width = width;
         this.hero = hero;
     }
-
-    private Hero hero;
 
     public void draw(Screen screen) throws IOException {
         screen.clear();
@@ -23,7 +24,7 @@ public class Arena {
     }
 
     public void processKey(KeyStroke key) {
-        hero = new Hero(10, 10);
+        hero = new Hero(1, 1);
         switch (key.getKeyType()) {
             case ArrowUp:
                 moveHero(hero.moveUp());
@@ -43,13 +44,20 @@ public class Arena {
 
     };
     public void moveHero(Position position) {
-        //if (canHeroMove(position))
+        if (canHeroMove(position))
             hero.setPosition(position);
     }
-    /*
+
     private boolean canHeroMove(Position position) {
-        if (position.GetX() < width && position.GetY() < height) return true;
+        Arena arena = new Arena(position, 22, 22, hero);
+        int x = arena.position.GetX() + arena.width;
+        int y = arena.position.GetY();
+        Position toprcorner = new Position(x, y);
+        int y1 = arena.position.GetY() + arena.height;
+        int x1 = arena.position.GetX();
+        Position bottomlcorner = new Position(x1, y1);
+        if ((position.GetX() > bottomlcorner.GetX() && position.GetX() < toprcorner.GetX()) && (position.GetY() > toprcorner.GetY() && position.GetY() < bottomlcorner.GetY())) return true;
         else return false;
     }
-    */
+
 }

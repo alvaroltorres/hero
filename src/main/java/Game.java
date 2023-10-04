@@ -16,9 +16,11 @@ public class Game {
     //private int y = 10;
     private final Hero hero;
     private Arena arena;
+    private Position position;
     public Game() throws IOException {
-        hero = new Hero(10, 10);
-        arena = new Arena(22, 22, hero);
+        hero = new Hero(1, 1);
+        position = new Position(0, 0);
+        arena = new Arena(position, 22, 22, hero);
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             this.screen = new TerminalScreen(terminal); //screen = new TerminalScreen(terminal);

@@ -7,7 +7,6 @@ public class Hero {
 
     private Position position;
 
-
     public Hero(int x, int y) {
         this.position = new Position(x, y);
 
@@ -25,12 +24,13 @@ public class Hero {
     public Position moveLeft(){
         return new Position(position.GetX() - 1, position.GetY());
     }
+    /*
     public void draw(Screen screen) throws IOException {
         screen.clear();
         screen.setCharacter(position.GetX(), position.GetY(), TextCharacter.fromCharacter('X')[0]);
         screen.refresh();
     }
-
+    */
     public void setPosition(Position position) {
        this.position  = position;
     }
