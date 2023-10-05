@@ -45,7 +45,7 @@ public class Arena {
     private List<Coin> createCoins() {
         Random random = new Random();
         ArrayList<Coin> coins = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
             coins.add(new Coin(random.nextInt(width - 2) + 1, random.nextInt(height - 2) + 1));
         return coins;
     }
@@ -87,7 +87,9 @@ public class Arena {
             moveHero(hero.moveLeft());
 
         retrieveCoins();
+        verifyMonsterCollisions();
         moveMonsters();
+        verifyMonsterCollisions();
 
         /*
         hero = new Hero(1, 1);
@@ -151,6 +153,14 @@ public class Arena {
                 monster.setPosition(monsterPosition);
             }
         }
+    }
+
+    private void verifyMonsterCollisions(){
+        for (Monster monster : monsters)
+            if (hero.getPosition().equals(monster.position)){
+                System.out.println("YOU LOST!");
+                System.exit(0);
+            }
     }
 
 }
