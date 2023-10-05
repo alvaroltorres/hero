@@ -2,10 +2,10 @@ public class Position {
     private int x;
     private int y;
 
-    public void SetX(){
+    public void SetX(int x){
         this.x = x;
     }
-    public void SetY(){
+    public void SetY(int y){
         this.y = y;
     }
 

@@ -12,7 +12,7 @@ public class Hero {
     private Position position;
 
     public Hero(int x, int y) {
-        this.position = new Position(x, y);
+        position = new Position(x, y);
 
     }; //Hero hero = new Hero(10, 10);
 
@@ -37,5 +37,8 @@ public class Hero {
 
     public void setPosition(Position position) {
        this.position  = position;
+    }
+    public Position getPosition() {
+        return position;
     }
 }

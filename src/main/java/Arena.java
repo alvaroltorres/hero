@@ -8,14 +8,15 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Arena {
     //private Position position;
     private int height;
     private int width;
-    private Hero hero;
-    //private List<Wall> walls;
+    private final Hero hero;
+    private List<Wall> walls;
 
     public Arena(int width, int height){
         //this.position = position;
@@ -23,7 +24,20 @@ public class Arena {
         this.width = width;
         hero = new Hero(width / 2, height / 2);
 
-        //this.walls = createWalls();
+        this.walls = createWalls();
+    }
+
+    private List<Wall> createWalls() {
+        List<Wall> walls = new ArrayList<>();
+        for (int c = 0; c < width; c++) {
+            walls.add(new Wall(c, 0));
+            walls.add(new Wall(c, height - 1));
+        }
+        for (int r = 1; r < height - 1; r++) {
+            walls.add(new Wall(0, r));
+            walls.add(new Wall(width - 1, r));
+        }
+        return walls;
     }
 
     public void draw(TextGraphics graphics) {
@@ -31,8 +45,8 @@ public class Arena {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         hero.draw(graphics);
 
-        //for (Wall wall : walls)
-           // wall.draw(graphics);
+        for (Wall wall : walls)
+            wall.draw(graphics);
         /*
         screen.clear();
         screen.setCharacter(height, width,TextCharacter.fromCharacter('X')[0]);
@@ -41,10 +55,14 @@ public class Arena {
     }
 
     public void processKey(KeyStroke key) {
-        if (key.getKeyType() == KeyType.ArrowUp) moveHero(hero.moveUp());
-        if (key.getKeyType() == KeyType.ArrowRight) moveHero(hero.moveRight());
-        if (key.getKeyType() == KeyType.ArrowDown) moveHero(hero.moveDown());
-        if (key.getKeyType() == KeyType.ArrowLeft) moveHero(hero.moveLeft());
+        if (key.getKeyType() == KeyType.ArrowUp)
+            moveHero(hero.moveUp());
+        if (key.getKeyType() == KeyType.ArrowRight)
+            moveHero(hero.moveRight());
+        if (key.getKeyType() == KeyType.ArrowDown)
+            moveHero(hero.moveDown());
+        if (key.getKeyType() == KeyType.ArrowLeft)
+            moveHero(hero.moveLeft());
         /*
         hero = new Hero(1, 1);
         switch (key.getKeyType()) {
@@ -85,21 +103,13 @@ public class Arena {
         if (position.GetX() > width - 1) return false;
         if (position.GetY() < 0) return false;
         if (position.GetY() > height - 1) return false;
+
+        for (Wall wall : walls)
+            if (wall.getPosition().GetX() == position.GetX() && wall.getPosition().GetY() == position.GetY()) return false;
+
         return true;
     }
-    /*
-    private List<Wall> createWalls() {
-        List<Wall> walls = new ArrayList<>();
-        for (int c = 0; c < width; c++) {
-            walls.add(new Wall(c, 0));
-            walls.add(new Wall(c, height - 1));
-        }
-        for (int r = 1; r < height - 1; r++) {
-            walls.add(new Wall(0, r));
-            walls.add(new Wall(width - 1, r));
-        }
-        return walls;
-    }
-    */
+
+
 
 }
