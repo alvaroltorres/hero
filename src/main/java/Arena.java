@@ -144,6 +144,10 @@ public class Arena {
                 coins.remove(coin);
                 break;
             }
+        if (coins.isEmpty()){
+            System.out.println("YOU WON!");
+            System.exit(0);
+        }
     }
 
     private void moveMonsters(){
