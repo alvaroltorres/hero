@@ -14,7 +14,7 @@ public class Monster extends Element{
         graphics.setBackgroundColor(TextColor.Factory.fromString("#023020"));
         graphics.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
         graphics.enableModifiers(SGR.ITALIC);
-        graphics.putString(new TerminalPosition(position.GetX(), position.GetY()), "-@-");
+        graphics.putString(new TerminalPosition(position.GetX(), position.GetY()), "~@~");
     }
 
     public Position move(){
