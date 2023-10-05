@@ -11,11 +11,12 @@ import java.util.Random;
 
 public class Arena {
     //private Position position;
-    private int height;
-    private int width;
+    private final int height;
+    private final int width;
     private final Hero hero;
-    private List<Wall> walls;
-    private List<Coin> coins;
+    private final List<Wall> walls;
+    private final List<Coin> coins;
+    private final List<Monster> monsters;
 
     public Arena(int width, int height){
         //this.position = position;
@@ -25,6 +26,7 @@ public class Arena {
 
         this.walls = createWalls();
         this.coins = createCoins();
+        this.monsters = createMonsters();
     }
 
     private List<Wall> createWalls() {
@@ -48,6 +50,14 @@ public class Arena {
         return coins;
     }
 
+    private List<Monster> createMonsters() {
+        Random random = new Random();
+        ArrayList<Monster> monsters = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+            monsters.add(new Monster(random.nextInt(width - 2) + 1, random.nextInt(height - 2) + 1));
+        return monsters;
+    }
+
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#808080"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
@@ -57,6 +67,8 @@ public class Arena {
             wall.draw(graphics);
         for (Coin coin : coins)
             coin.draw(graphics);
+        for (Monster monster : monsters)
+            monster.draw(graphics);
         /*
         screen.clear();
         screen.setCharacter(height, width,TextCharacter.fromCharacter('X')[0]);
@@ -75,6 +87,7 @@ public class Arena {
             moveHero(hero.moveLeft());
 
         retrieveCoins();
+        moveMonsters();
 
         /*
         hero = new Hero(1, 1);
@@ -131,5 +144,13 @@ public class Arena {
             }
     }
 
+    private void moveMonsters(){
+        for (Monster monster : monsters){
+            Position monsterPosition = monster.move();
+            if (canHeroMove(monsterPosition)){
+                monster.setPosition(monsterPosition);
+            }
+        }
+    }
 
 }
