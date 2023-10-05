@@ -105,8 +105,8 @@ public class Arena {
         if (position.GetY() > height - 1) return false;
 
         for (Wall wall : walls)
-            if (wall.getPosition().GetX() == position.GetX() && wall.getPosition().GetY() == position.GetY()) return false;
-
+            if (wall.getPosition().equals(position));
+        
         return true;
     }
 
