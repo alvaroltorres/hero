@@ -1,3 +1,4 @@
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -8,20 +9,20 @@ import java.io.IOException;
 
 public class Game {
 
-    private Terminal terminal;
-    private Screen screen;
+    private final TerminalScreen screen;
+    //private Screen screen;
 
     //private int x = 10;
     //private int y = 10;
-    private final Hero hero;
-    private Arena arena;
-    private Position position;
+    //private final Hero hero;
+    private final Arena arena;
+    //private Position position;
 
     public Game(int width, int height) throws IOException {
-        hero = new Hero(1, 1);
-        position = new Position(0, 0);
+        //hero = new Hero(1, 1);
+        //position = new Position(0, 0);
         arena = new Arena(width, height);
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
+        Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
         this.screen = new TerminalScreen(terminal); //screen = new TerminalScreen(terminal);
         screen.setCursorPosition(null); // we don't need a cursor
         screen.startScreen(); // screens must be started

@@ -8,24 +8,31 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Arena {
     //private Position position;
     private int height;
     private int width;
     private Hero hero;
+    //private List<Wall> walls;
 
     public Arena(int width, int height){
         //this.position = position;
         this.height = height;
         this.width = width;
         hero = new Hero(width / 2, height / 2);
+
+        //this.walls = createWalls();
     }
 
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
         hero.draw(graphics);
+
+        //for (Wall wall : walls)
+           // wall.draw(graphics);
         /*
         screen.clear();
         screen.setCharacter(height, width,TextCharacter.fromCharacter('X')[0]);
@@ -80,5 +87,19 @@ public class Arena {
         if (position.GetY() > height - 1) return false;
         return true;
     }
+    /*
+    private List<Wall> createWalls() {
+        List<Wall> walls = new ArrayList<>();
+        for (int c = 0; c < width; c++) {
+            walls.add(new Wall(c, 0));
+            walls.add(new Wall(c, height - 1));
+        }
+        for (int r = 1; r < height - 1; r++) {
+            walls.add(new Wall(0, r));
+            walls.add(new Wall(width - 1, r));
+        }
+        return walls;
+    }
+    */
 
 }
